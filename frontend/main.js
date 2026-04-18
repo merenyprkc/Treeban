@@ -197,7 +197,7 @@ async function showProfile(username) {
   if (app.user) {
     nav.innerHTML = `<a href="#/dashboard" class="btn btn-ghost btn-sm">Dashboard</a>`;
   } else {
-    nav.innerHTML = `<a href="#/login" class="btn btn-ghost btn-sm">Giriş Yap</a><a href="#/register" class="btn btn-primary btn-sm">Üye Ol</a>`;
+    nav.innerHTML = `<a href="#/login" class="btn btn-ghost btn-sm">Log In</a><a href="#/register" class="btn btn-primary btn-sm">Sign Up</a>`;
   }
 
   const { user, error } = await api('GET', `/api/users/${username}`);
