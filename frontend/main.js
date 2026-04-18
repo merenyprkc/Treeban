@@ -23,8 +23,11 @@ const app = {
 
 const escHtml = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const $ = id => document.getElementById(id);
+
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 const api = async (method, path, body) => {
-  const r = await fetch(path, { method, credentials: 'include', headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
+  const r = await fetch(API_BASE + path, { method, credentials: 'include', headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
   return r.json();
 };
 
@@ -303,7 +306,7 @@ function setPermissionUI(perm) {
 
 // ── Socket connection ─────────────────────────────────────────────────────
 function connectSocket(listId, shareToken) {
-  const socket = io({ path: '/socket.io', withCredentials: true });
+  const socket = io(API_BASE || undefined, { path: '/socket.io', withCredentials: true });
   app.socket = socket;
 
   socket.on('connect', () => {
