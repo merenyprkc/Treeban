@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+dist/
+
+# Secrets – NEVER commit
+.env
+.env.local
+.env.*.local
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/

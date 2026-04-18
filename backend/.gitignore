@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Secrets – NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# SQLite (artık kullanılmıyor ama eski DB kalmasın)
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
