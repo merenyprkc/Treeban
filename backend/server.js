@@ -5,7 +5,8 @@ const { Server }   = require('socket.io');
 const cors         = require('cors');
 const cookieParser = require('cookie-parser');
 const bcrypt       = require('bcryptjs');
-const { v4: uuidv4 } = require('uuid');
+const crypto       = require('crypto');
+function uuidv4()  { return crypto.randomUUID(); }
 
 const db   = require('./database');
 const auth = require('./auth');
