@@ -2,7 +2,9 @@
 
 > Focus. Connect. Complete.
 
-Treeban is a minimalist task manager that allows you to create **dependencies** between tasks and offers **real-time collaboration**.
+**Treeban** is a minimalist task manager that allows you to create **dependencies** between tasks and offers **real-time collaboration**.
+
+🚀 **Live App:** [https://treeban.vercel.app](https://treeban.vercel.app)
 
 ## Features
 
