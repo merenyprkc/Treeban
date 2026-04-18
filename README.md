@@ -32,4 +32,4 @@
 
 ## License
 
-MIT
+Copyright (c) 2026 merenyprkc. All rights reserved.
