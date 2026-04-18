@@ -31,13 +31,13 @@ app.post('/api/auth/register', async (req, res) => {
   try {
     const { username, email, password } = req.body || {};
     if (!username || !email || !password)
-      return res.status(400).json({ error: 'Tüm alanlar zorunludur.' });
+      return res.status(400).json({ error: 'All fields are required.' });
     if (username.length < 3 || username.length > 30 || !/^[a-zA-Z0-9_]+$/.test(username))
-      return res.status(400).json({ error: 'Kullanıcı adı 3-30 karakter, sadece harf/rakam/_' });
+      return res.status(400).json({ error: 'Username must be 3-30 chars, alphanumeric or underscore.' });
     if (password.length < 6)
-      return res.status(400).json({ error: 'Şifre en az 6 karakter olmalıdır.' });
+      return res.status(400).json({ error: 'Password must be at least 6 characters.' });
     if (await db.getUserByEmail(email))
-      return res.status(409).json({ error: 'Bu e-posta zaten kullanılıyor.' });
+      return res.status(409).json({ error: 'Email is already in use.' });
     const id   = uuidv4().replace(/-/g,'').slice(0,16);
     const hash = await bcrypt.hash(password, 10);
     const user = await db.createUser(id, username, email, hash);
@@ -45,9 +45,9 @@ app.post('/api/auth/register', async (req, res) => {
     res.json({ user: publicUser(user) });
   } catch (e) {
     if (e.message?.includes('unique') || e.code === '23505')
-      return res.status(409).json({ error: 'Bu kullanıcı adı veya e-posta alınmış.' });
+      return res.status(409).json({ error: 'Username or email is already taken.' });
     console.error(e);
-    res.status(500).json({ error: 'Sunucu hatası.' });
+    res.status(500).json({ error: 'Server error.' });
   }
 });
 
@@ -55,15 +55,15 @@ app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body || {};
     if (!email || !password)
-      return res.status(400).json({ error: 'E-posta ve şifre gerekli.' });
+      return res.status(400).json({ error: 'Email and password are required.' });
     const row = await db.getUserByEmail(email);
-    if (!row) return res.status(401).json({ error: 'E-posta veya şifre hatalı.' });
+    if (!row) return res.status(401).json({ error: 'Invalid email or password.' });
     const ok = await bcrypt.compare(password, row.password_hash);
-    if (!ok)  return res.status(401).json({ error: 'E-posta veya şifre hatalı.' });
+    if (!ok)  return res.status(401).json({ error: 'Invalid email or password.' });
     auth.setAuthCookie(res, row.id, row.username);
     const user = await db.getUserById(row.id);
     res.json({ user: publicUser(user) });
-  } catch (e) { console.error(e); res.status(500).json({ error: 'Sunucu hatası.' }); }
+  } catch (e) { console.error(e); res.status(500).json({ error: 'Server error.' }); }
 });
 
 app.post('/api/auth/logout', (req, res) => {
@@ -82,7 +82,7 @@ app.patch('/api/auth/me', auth.requireAuth, async (req, res) => {
     const { displayName, bio } = req.body || {};
     const user = await db.updateProfile(req.user.userId, displayName || '', bio || '');
     res.json({ user: publicUser(user) });
-  } catch (e) { console.error(e); res.status(500).json({ error: 'Sunucu hatası.' }); }
+  } catch (e) { console.error(e); res.status(500).json({ error: 'Server error.' }); }
 });
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -91,13 +91,13 @@ app.patch('/api/auth/me', auth.requireAuth, async (req, res) => {
 
 app.get('/api/users/:username', async (req, res) => {
   const u = await db.getUserByUsername(req.params.username);
-  if (!u) return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+  if (!u) return res.status(404).json({ error: 'User not found.' });
   res.json({ user: u });
 });
 
 app.get('/api/users/:username/lists', async (req, res) => {
   const u = await db.getUserByUsername(req.params.username);
-  if (!u) return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+  if (!u) return res.status(404).json({ error: 'User not found.' });
   const lists = await db.getPublicListsByOwner(u.id);
   res.json({ lists });
 });
@@ -112,7 +112,7 @@ app.post('/api/lists', auth.requireAuth, async (req, res) => {
     const name = req.body.name || 'Untitled List';
     const list = await db.createList(id, name, req.user.userId, !!req.body.isPublic);
     res.json(list);
-  } catch (e) { console.error(e); res.status(500).json({ error: 'Sunucu hatası.' }); }
+  } catch (e) { console.error(e); res.status(500).json({ error: 'Server error.' }); }
 });
 
 app.get('/api/lists', auth.requireAuth, async (req, res) => {
@@ -122,16 +122,16 @@ app.get('/api/lists', auth.requireAuth, async (req, res) => {
 
 app.get('/api/lists/:id', auth.optionalAuth, async (req, res) => {
   const snap = await db.getListSnapshot(req.params.id);
-  if (!snap.list) return res.status(404).json({ error: 'Liste bulunamadı.' });
+  if (!snap.list) return res.status(404).json({ error: 'List not found.' });
   const perm = await resolvePermission(snap.list, req.user, req.query.share);
-  if (!perm)   return res.status(403).json({ error: 'Bu listeye erişim izniniz yok.' });
+  if (!perm)   return res.status(403).json({ error: 'You do not have permission to access this list.' });
   res.json({ ...snap, permission: perm });
 });
 
 app.patch('/api/lists/:id', auth.requireAuth, async (req, res) => {
   const list = await db.getList(req.params.id);
-  if (!list) return res.status(404).json({ error: 'Liste bulunamadı.' });
-  if (list.owner_id !== req.user.userId) return res.status(403).json({ error: 'Sadece sahip düzenleyebilir.' });
+  if (!list) return res.status(404).json({ error: 'List not found.' });
+  if (list.owner_id !== req.user.userId) return res.status(403).json({ error: 'Only the owner can edit.' });
   if (req.body.name !== undefined)     await db.renameList(list.id, req.body.name);
   if (req.body.isPublic !== undefined) await db.setListPublic(list.id, req.body.isPublic);
   res.json(await db.getList(list.id));
@@ -142,20 +142,20 @@ app.patch('/api/lists/:id', auth.requireAuth, async (req, res) => {
 app.post('/api/lists/:id/shares', auth.requireAuth, async (req, res) => {
   try {
     const list = await db.getList(req.params.id);
-    if (!list) return res.status(404).json({ error: 'Liste bulunamadı.' });
-    if (list.owner_id !== req.user.userId) return res.status(403).json({ error: 'Sadece sahip paylaşabilir.' });
+    if (!list) return res.status(404).json({ error: 'List not found.' });
+    if (list.owner_id !== req.user.userId) return res.status(403).json({ error: 'Only the owner can share.' });
     const permission = ['view','edit'].includes(req.body.permission) ? req.body.permission : 'view';
     const shareId = uuidv4().replace(/-/g,'').slice(0,12);
     const token   = uuidv4().replace(/-/g,'');
     const share   = await db.createShare(shareId, list.id, token, permission);
     res.json(share);
-  } catch (e) { console.error(e); res.status(500).json({ error: 'Sunucu hatası.' }); }
+  } catch (e) { console.error(e); res.status(500).json({ error: 'Server error.' }); }
 });
 
 app.get('/api/lists/:id/shares', auth.requireAuth, async (req, res) => {
   const list = await db.getList(req.params.id);
-  if (!list) return res.status(404).json({ error: 'Liste bulunamadı.' });
-  if (list.owner_id !== req.user.userId) return res.status(403).json({ error: 'Yetkisiz.' });
+  if (!list) return res.status(404).json({ error: 'List not found.' });
+  if (list.owner_id !== req.user.userId) return res.status(403).json({ error: 'Unauthorized.' });
   res.json({ shares: await db.getSharesForList(list.id) });
 });
 
@@ -203,9 +203,9 @@ io.on('connection', (socket) => {
     if (!listId) return;
     try {
       const list = await db.getList(listId);
-      if (!list) return socket.emit('error_event', 'Liste bulunamadı.');
+      if (!list) return socket.emit('error_event', 'List not found.');
       const perm = await resolvePermission(list, jwtUser, shareToken);
-      if (!perm)  return socket.emit('error_event', 'Bu listeye erişim izniniz yok.');
+      if (!perm)  return socket.emit('error_event', 'You do not have permission to access this list.');
 
       let displayName = userName || 'Misafir';
       if (jwtUser) {

@@ -30,7 +30,7 @@ function clearAuthCookie(res) {
 // Express middleware
 function requireAuth(req, res, next) {
   const user = verifyToken(req.cookies?.[COOKIE_NAME]);
-  if (!user) return res.status(401).json({ error: 'Giriş yapılmamış.' });
+  if (!user) return res.status(401).json({ error: 'Not logged in.' });
   req.user = user;
   next();
 }

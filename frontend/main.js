@@ -136,7 +136,7 @@ async function showDashboard() {
   showPage('page-dashboard');
   $('dash-profile-link').href = `#/profile/${app.user.username}`;
   $('dash-profile-link').textContent = (app.user.displayName || app.user.username)[0].toUpperCase();
-  $('dash-sub-text').textContent = `Hoş geldin, ${app.user.displayName || app.user.username}`;
+  $('dash-sub-text').textContent = `Welcome, ${app.user.displayName || app.user.username}`;
 
   const { lists } = await api('GET', '/api/lists');
   renderDashLists(lists || []);
@@ -159,7 +159,7 @@ function renderDashLists(lists) {
         <div class="list-card-name">${escHtml(list.name)}</div>
         <div class="list-card-meta">
           <span class="list-card-badge ${list.is_public ? 'badge-public' : 'badge-private'}">
-            ${list.is_public ? '◉ Herkese Açık' : '◎ Özel'}
+            ${list.is_public ? '◉ Public' : '◎ Private'}
           </span>
         </div>
       </div>
@@ -175,7 +175,7 @@ $('btn-new-list-close').addEventListener('click', () => $('new-list-modal').clas
 $('new-list-modal').addEventListener('click', e => { if (e.target === $('new-list-modal')) $('new-list-modal').classList.add('hidden'); });
 
 $('btn-create-list').addEventListener('click', async () => {
-  const name     = $('new-list-name').value.trim() || 'Yeni Liste';
+  const name     = $('new-list-name').value.trim() || 'New List';
   const isPublic = $('new-list-public').checked;
   const list = await api('POST', '/api/lists', { name, isPublic });
   $('new-list-modal').classList.add('hidden');
@@ -201,7 +201,7 @@ async function showProfile(username) {
 
   const { user, error } = await api('GET', `/api/users/${username}`);
   if (error || !user) {
-    $('profile-username').textContent    = 'Kullanıcı bulunamadı';
+    $('profile-username').textContent    = 'User not found';
     $('profile-displayname').textContent = '';
     return;
   }
@@ -236,7 +236,7 @@ async function showProfile(username) {
       <div class="list-card-icon">${(list.name||'?')[0].toUpperCase()}</div>
       <div class="list-card-info">
         <div class="list-card-name">${escHtml(list.name)}</div>
-        <div class="list-card-meta"><span class="list-card-badge badge-public">◉ Herkese Açık</span></div>
+        <div class="list-card-meta"><span class="list-card-badge badge-public">◉ Public</span></div>
       </div>
     `;
     container.appendChild(card);
@@ -288,7 +288,7 @@ function setPermissionUI(perm) {
   // Badge
   const badge = $('permission-badge');
   badge.className = `perm-badge perm-${perm === 'owner' ? 'owner' : perm === 'edit' ? 'edit-badge' : 'view-badge'}`;
-  badge.textContent = perm === 'owner' ? '◈ Sahip' : perm === 'edit' ? '✎ Düzenleyebilir' : '👁 Yalnızca Görüntüle';
+  badge.textContent = perm === 'owner' ? '◈ Owner' : perm === 'edit' ? '✎ Edityebilir' : '👁 View Only';
 
   // Show/hide edit UI
   if (perm === 'view') {
@@ -361,7 +361,7 @@ function connectSocket(listId, shareToken) {
 function setConnBadge(s) {
   const b = $('connection-badge');
   b.className = `conn-badge conn-${s}`;
-  b.textContent = s === 'connected' ? 'Bağlı' : s === 'connecting' ? 'Bağlanıyor…' : 'Bağlantı kesildi';
+  b.textContent = s === 'connected' ? 'Connected' : s === 'connecting' ? 'Connecting...' : 'Disconnected';
 }
 
 // ── Lock logic ────────────────────────────────────────────────────────────
@@ -400,8 +400,8 @@ function renderKanban() {
       <div class="kanban-card-title">${escHtml(task.title)}</div>
       <div class="kanban-card-meta">
         ${depCount > 0 ? `<span class="dep-count">⇢ ${depCount}</span>` : ''}
-        ${task.description ? '<span title="Açıklama var">✎</span>' : ''}
-        ${isLocked ? '<span title="Bağımlılık bitmedi">🔒</span>' : ''}
+        ${task.description ? '<span title="Has description">✎</span>' : ''}
+        ${isLocked ? '<span title="Dependencies pending">🔒</span>' : ''}
       </div>`;
     card.addEventListener('click', () => openTaskModal(task.id));
     card.addEventListener('dragstart', e => { e.dataTransfer.setData('taskId', task.id); setTimeout(() => (card.style.opacity = '0.4'), 0); });
@@ -511,10 +511,10 @@ function createTreeNode(task) {
     <div class="node-status-row">
       <button class="nsb" data-s="open">Yapılacak</button>
       <button class="nsb" data-s="in_progress">Yapılıyor</button>
-      <button class="nsb" data-s="done">✓ Bitti</button>
+      <button class="nsb" data-s="done">✓ Done</button>
     </div>
     <div class="node-actions">
-      <button class="node-btn node-open-btn">↗ Detay</button>
+      <button class="node-btn node-open-btn">↗ Details</button>
       <button class="node-btn node-connect-btn">⇢</button>
     </div>`;
   node.addEventListener('mousedown', onNodeMouseDown);
@@ -575,13 +575,13 @@ function drawEdges() {
 }
 
 function handleConnectClick(id) {
-  if (!app.connectMode) { app.connectMode=true; app.connectSource=id; renderTree(); $('tree-connect-hint').textContent=`"${app.tasks[id]?.title}" → hedef düğüme tıkla`; $('btn-cancel-connect').classList.remove('hidden'); }
+  if (!app.connectMode) { app.connectMode=true; app.connectSource=id; renderTree(); $('tree-connect-hint').textContent=`"${app.tasks[id]?.title}" → click target node`; $('btn-cancel-connect').classList.remove('hidden'); }
   else if (app.connectSource===id) exitConnectMode();
 }
 function exitConnectMode() {
   app.connectMode=false; app.connectSource=null;
   $('btn-cancel-connect').classList.add('hidden');
-  $('tree-connect-hint').textContent='Bağlantı için ⇢ tıkla, ardından hedef düğüme tıkla.';
+  $('tree-connect-hint').textContent='Click ⇢ to connect, then click target.';
   nodesContainer.querySelectorAll('.connect-source').forEach(n=>n.classList.remove('connect-source'));
 }
 $('btn-cancel-connect').addEventListener('click', exitConnectMode);
@@ -601,7 +601,7 @@ $('view-toggle').querySelectorAll('.view-btn').forEach(btn => {
 let nameDebounce;
 $('sidebar-list-name').addEventListener('input', () => {
   clearTimeout(nameDebounce);
-  nameDebounce = setTimeout(() => { if (app.permission==='view') return; app.socket?.emit('rename_list', { listId: app.list?.id, name: $('sidebar-list-name').textContent.trim()||'Liste' }); }, 700);
+  nameDebounce = setTimeout(() => { if (app.permission==='view') return; app.socket?.emit('rename_list', { listId: app.list?.id, name: $('sidebar-list-name').textContent.trim()||'List' }); }, 700);
 });
 
 // Users
@@ -610,7 +610,7 @@ function renderUsers(users) {
   Object.entries(users).forEach(([sid, info]) => {
     const chip = document.createElement('div'); chip.className = 'user-chip';
     const isMe = sid === app.mySocketId;
-    chip.innerHTML = `<span class="user-dot ${isMe?'me':''}"></span>${escHtml(info.name||'Misafir')}${isMe?' <span style="color:var(--txt-3);font-size:10px">(sen)</span>':''}`;
+    chip.innerHTML = `<span class="user-dot ${isMe?'me':''}"></span>${escHtml(info.name||'Guest')}${isMe?' <span style="color:var(--txt-3);font-size:10px">(sen)</span>':''}`;
     ul.appendChild(chip);
   });
 }
@@ -623,13 +623,13 @@ function refreshTaskModal(id) {
   const task = app.tasks[id]; if (!task) return;
   $('modal-task-title').value = task.title;
   $('modal-task-desc').value  = task.description||'';
-  const labels = { open:'Yapılacak', in_progress:'Yapılıyor', done:'Tamamlandı' };
-  $('modal-status-badge').textContent = labels[task.status]||'Yapılacak';
+  const labels = { open:'To Do', in_progress:'In Progress', done:'Done' };
+  $('modal-status-badge').textContent = labels[task.status]||'To Do';
   $('modal-status-badge').className   = `status-badge status-${task.status||'open'}`;
   document.querySelectorAll('.status-cycle-btn').forEach(b => b.classList.toggle('active', b.dataset.status===(task.status||'open')));
   const deps = app.edges.filter(e => e.targetId===id);
   $('modal-deps-list').innerHTML = '';
-  if (!deps.length) { $('modal-deps-list').innerHTML='<span style="font-size:12px;color:var(--txt-3)">Bağımlılık yok</span>'; }
+  if (!deps.length) { $('modal-deps-list').innerHTML='<span style="font-size:12px;color:var(--txt-3)">No dependencies</span>'; }
   else deps.forEach(dep => {
     const src = app.tasks[dep.sourceId]; if (!src) return;
     const chip = document.createElement('div'); chip.className='dep-chip';
@@ -643,10 +643,10 @@ $('btn-modal-close').addEventListener('click', closeTaskModal);
 $('task-modal').addEventListener('click', e => { if (e.target===$('task-modal')) closeTaskModal(); });
 
 let titleDebounce, descDebounce;
-$('modal-task-title').addEventListener('input', () => { clearTimeout(titleDebounce); titleDebounce=setTimeout(()=>{ if (!app.activeModalTaskId||app.permission==='view') return; app.socket.emit('update_task_title',{listId:app.list.id,taskId:app.activeModalTaskId,title:$('modal-task-title').value.trim()||'Görev'}); },600); });
+$('modal-task-title').addEventListener('input', () => { clearTimeout(titleDebounce); titleDebounce=setTimeout(()=>{ if (!app.activeModalTaskId||app.permission==='view') return; app.socket.emit('update_task_title',{listId:app.list.id,taskId:app.activeModalTaskId,title:$('modal-task-title').value.trim()||'Task'}); },600); });
 $('modal-task-desc').addEventListener('input',  () => { clearTimeout(descDebounce);  descDebounce =setTimeout(()=>{ if (!app.activeModalTaskId||app.permission==='view') return; app.socket.emit('update_task_description',{listId:app.list.id,taskId:app.activeModalTaskId,description:$('modal-task-desc').value}); },800); });
 document.querySelectorAll('.status-cycle-btn').forEach(btn => btn.addEventListener('click',()=>{ if (!app.activeModalTaskId||app.permission==='view') return; app.socket.emit('update_task_status',{listId:app.list.id,taskId:app.activeModalTaskId,status:btn.dataset.status}); }));
-$('btn-modal-delete').addEventListener('click', ()=>{ if (!app.activeModalTaskId||!confirm('Sil?')) return; app.socket.emit('delete_task',{listId:app.list.id,taskId:app.activeModalTaskId}); closeTaskModal(); });
+$('btn-modal-delete').addEventListener('click', ()=>{ if (!app.activeModalTaskId||!confirm('Delete?')) return; app.socket.emit('delete_task',{listId:app.list.id,taskId:app.activeModalTaskId}); closeTaskModal(); });
 
 // ══════════════════════════════════════════════════════════════════════════════
 // ADD TASK MODAL
@@ -696,16 +696,16 @@ async function loadShareLinks() {
 function renderShareLinks(shares) {
   const container = $('share-links-modal-list'); if (!container) return;
   container.innerHTML = '';
-  if (!shares.length) { container.innerHTML='<div style="font-size:12px;color:var(--txt-3);padding:8px 0">Henüz paylaşım bağlantısı yok.</div>'; return; }
+  if (!shares.length) { container.innerHTML='<div style="font-size:12px;color:var(--txt-3);padding:8px 0">No share links yet.</div>'; return; }
   shares.forEach(s => {
     const url  = `${location.origin}/?list=${app.list.id}&share=${s.token}`;
     const item = document.createElement('div'); item.className='share-link-item';
     item.innerHTML = `
-      <span class="share-perm-tag ${s.permission==='edit'?'perm-edit':'perm-view'}">${s.permission==='edit'?'Düzenle':'Görüntüle'}</span>
+      <span class="share-perm-tag ${s.permission==='edit'?'perm-edit':'perm-view'}">${s.permission==='edit'?'Edit':'View'}</span>
       <span class="share-link-url">${url}</span>
-      <button class="share-link-copy-btn" data-url="${url}">Kopyala</button>
+      <button class="share-link-copy-btn" data-url="${url}">Copy</button>
       <button class="share-link-del-btn" data-id="${s.id}" title="Sil">×</button>`;
-    item.querySelector('.share-link-copy-btn').addEventListener('click', e => { navigator.clipboard.writeText(e.target.dataset.url); e.target.textContent='✓'; setTimeout(()=>e.target.textContent='Kopyala',1500); });
+    item.querySelector('.share-link-copy-btn').addEventListener('click', e => { navigator.clipboard.writeText(e.target.dataset.url); e.target.textContent='✓'; setTimeout(()=>e.target.textContent='Copy',1500); });
     item.querySelector('.share-link-del-btn').addEventListener('click', async e => { await api('DELETE',`/api/shares/${e.target.dataset.id}`); loadShareLinks(); });
     container.appendChild(item);
   });

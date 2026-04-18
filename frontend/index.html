@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Treeban</title>
-  <meta name="description" content="Odaklanarak çalış. Görevleri bağla, listeni paylaş, birlikte tamamla."/>
+  <meta name="description" content="Focus on work. Connect tasks, share your list, complete together."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -19,23 +19,23 @@
   <nav class="top-nav">
     <span class="nav-logo">◈ Treeban</span>
     <div class="nav-actions">
-      <a href="#/login"    class="btn btn-ghost btn-sm">Giriş Yap</a>
-      <a href="#/register" class="btn btn-primary btn-sm">Üye Ol</a>
+      <a href="#/login"    class="btn btn-ghost btn-sm">Log In</a>
+      <a href="#/register" class="btn btn-primary btn-sm">Sign Up</a>
     </div>
   </nav>
   <section class="hero">
-    <div class="hero-badge">Yeni</div>
-    <h1 class="hero-title">Odaklan.<br/>Bağlantı kur.<br/>Tamamla.</h1>
-    <p class="hero-sub">Treeban; görevleri hiyerarşik düğümlere bağlayan, gerçek zamanlı işbirliğine izin veren minimize bir görev yöneticisidir.</p>
+    <div class="hero-badge">New</div>
+    <h1 class="hero-title">Focus.<br/>Connect.<br/>Complete.</h1>
+    <p class="hero-sub">Treeban is a minimalist task manager that connects tasks into hierarchical nodes and allows real-time collaboration.</p>
     <div class="hero-ctas">
-      <a href="#/register" class="btn btn-primary btn-large">Ücretsiz Başla</a>
-      <a href="#/login"    class="btn btn-ghost btn-large">Giriş Yap</a>
+      <a href="#/register" class="btn btn-primary btn-large">Start for Free</a>
+      <a href="#/login"    class="btn btn-ghost btn-large">Log In</a>
     </div>
     <div class="hero-features">
-      <div class="feat"><span class="feat-icon">⇢</span><span>Görevler arası bağımlılık</span></div>
-      <div class="feat"><span class="feat-icon">◈</span><span>Treeban kilit algoritması</span></div>
-      <div class="feat"><span class="feat-icon">⊡</span><span>Gerçek zamanlı işbirliği</span></div>
-      <div class="feat"><span class="feat-icon">⊙</span><span>Herkese açık profiller</span></div>
+      <div class="feat"><span class="feat-icon">⇢</span><span>Task Dependencies</span></div>
+      <div class="feat"><span class="feat-icon">◈</span><span>Treeban Lock Algorithm</span></div>
+      <div class="feat"><span class="feat-icon">⊡</span><span>Real-time Collaboration</span></div>
+      <div class="feat"><span class="feat-icon">⊙</span><span>Public Profiles</span></div>
     </div>
   </section>
 </div>
@@ -45,15 +45,15 @@
   <div class="auth-wrap">
     <a href="#/" class="auth-logo">◈ Treeban</a>
     <div class="auth-card">
-      <h2 class="auth-title">Giriş Yap</h2>
-      <p class="auth-sub">Hesabın yok mu? <a href="#/register" class="auth-link">Üye ol</a></p>
+      <h2 class="auth-title">Log In</h2>
+      <p class="auth-sub">No account? <a href="#/register" class="auth-link">Üye ol</a></p>
       <form id="form-login" class="auth-form" autocomplete="on">
-        <label class="field-label">E-posta</label>
-        <input id="login-email"    class="input-field" type="email"    placeholder="ornek@mail.com" required autocomplete="email"/>
-        <label class="field-label">Şifre</label>
+        <label class="field-label">Email</label>
+        <input id="login-email"    class="input-field" type="email"    placeholder="example@mail.com" required autocomplete="email"/>
+        <label class="field-label">Password</label>
         <input id="login-password" class="input-field" type="password" placeholder="••••••••"      required autocomplete="current-password"/>
         <div id="login-error" class="form-error hidden"></div>
-        <button type="submit" class="btn btn-primary btn-full">Giriş Yap</button>
+        <button type="submit" class="btn btn-primary btn-full">Log In</button>
       </form>
     </div>
   </div>
@@ -64,17 +64,17 @@
   <div class="auth-wrap">
     <a href="#/" class="auth-logo">◈ Treeban</a>
     <div class="auth-card">
-      <h2 class="auth-title">Üye Ol</h2>
-      <p class="auth-sub">Zaten hesabın var mı? <a href="#/login" class="auth-link">Giriş yap</a></p>
+      <h2 class="auth-title">Sign Up</h2>
+      <p class="auth-sub">Already have an account? <a href="#/login" class="auth-link">Log in</a></p>
       <form id="form-register" class="auth-form" autocomplete="on">
-        <label class="field-label">Kullanıcı Adı <span class="field-hint">(herkese görünür)</span></label>
-        <input id="reg-username" class="input-field" type="text"     placeholder="kullanici_adi" required autocomplete="username" pattern="[a-zA-Z0-9_]{3,30}"/>
-        <label class="field-label">E-posta</label>
-        <input id="reg-email"    class="input-field" type="email"    placeholder="ornek@mail.com" required autocomplete="email"/>
-        <label class="field-label">Şifre <span class="field-hint">(en az 6 karakter)</span></label>
+        <label class="field-label">Username <span class="field-hint">(publicly visible)</span></label>
+        <input id="reg-username" class="input-field" type="text"     placeholder="username" required autocomplete="username" pattern="[a-zA-Z0-9_]{3,30}"/>
+        <label class="field-label">Email</label>
+        <input id="reg-email"    class="input-field" type="email"    placeholder="example@mail.com" required autocomplete="email"/>
+        <label class="field-label">Password <span class="field-hint">(min 6 chars)</span></label>
         <input id="reg-password" class="input-field" type="password" placeholder="••••••••"       required autocomplete="new-password"/>
         <div id="reg-error" class="form-error hidden"></div>
-        <button type="submit" class="btn btn-primary btn-full">Üye Ol</button>
+        <button type="submit" class="btn btn-primary btn-full">Sign Up</button>
       </form>
     </div>
   </div>
@@ -85,22 +85,22 @@
   <nav class="top-nav">
     <a href="#/" class="nav-logo">◈ Treeban</a>
     <div class="nav-actions">
-      <a id="dash-profile-link" href="#/profile/me" class="nav-avatar" title="Profil">?</a>
-      <button id="btn-logout" class="btn btn-ghost btn-sm">Çıkış Yap</button>
+      <a id="dash-profile-link" href="#/profile/me" class="nav-avatar" title="Profile">?</a>
+      <button id="btn-logout" class="btn btn-ghost btn-sm">Log Out</button>
     </div>
   </nav>
   <div class="dash-wrap">
     <div class="dash-header">
       <div>
-        <h1 class="dash-title">Listelerim</h1>
-        <p class="dash-sub" id="dash-sub-text">Yükleniyor…</p>
+        <h1 class="dash-title">My Lists</h1>
+        <p class="dash-sub" id="dash-sub-text">Loading...</p>
       </div>
-      <button id="btn-new-list" class="btn btn-primary">+ Yeni Liste</button>
+      <button id="btn-new-list" class="btn btn-primary">+ New List</button>
     </div>
     <div id="dash-lists" class="dash-lists"></div>
     <div id="dash-empty" class="dash-empty hidden">
       <div class="empty-icon">◎</div>
-      <p>Henüz listen yok. Hemen oluştur!</p>
+      <p>You don't have any lists yet. Create one now!</p>
     </div>
   </div>
 
@@ -108,14 +108,14 @@
   <div id="new-list-modal" class="modal-overlay hidden">
     <div class="modal-card modal-card-xs">
       <button class="modal-close" id="btn-new-list-close">✕</button>
-      <h3 class="modal-card-heading">Yeni Liste Oluştur</h3>
-      <input id="new-list-name" class="input-field" placeholder="Liste adı…" maxlength="80"/>
+      <h3 class="modal-card-heading">Create New List</h3>
+      <input id="new-list-name" class="input-field" placeholder="List name..." maxlength="80"/>
       <label class="toggle-row">
-        <span class="toggle-label">Herkese açık profilde göster</span>
+        <span class="toggle-label">Show on public profile</span>
         <input type="checkbox" id="new-list-public" class="toggle-checkbox"/>
         <span class="toggle-track"><span class="toggle-thumb"></span></span>
       </label>
-      <button id="btn-create-list" class="btn btn-primary btn-full">Oluştur</button>
+      <button id="btn-create-list" class="btn btn-primary btn-full">Create</button>
     </div>
   </div>
 </div>
@@ -138,11 +138,11 @@
         <button id="btn-edit-profile" class="btn btn-ghost btn-sm">✎ Düzenle</button>
       </div>
     </div>
-    <div class="profile-section-label">Herkese Açık Listeler</div>
+    <div class="profile-section-label">Public Lists</div>
     <div id="profile-lists" class="dash-lists"></div>
     <div id="profile-empty" class="dash-empty hidden">
       <div class="empty-icon">◎</div>
-      <p>Herkese açık liste paylaşılmamış.</p>
+      <p>No public lists shared.</p>
     </div>
   </div>
 
@@ -150,13 +150,13 @@
   <div id="edit-profile-modal" class="modal-overlay hidden">
     <div class="modal-card modal-card-xs">
       <button class="modal-close" id="btn-edit-profile-close">✕</button>
-      <h3 class="modal-card-heading">Profili Düzenle</h3>
-      <label class="field-label">Görünen Ad</label>
-      <input id="edit-displayname" class="input-field" placeholder="Görünen adın…" maxlength="50"/>
-      <label class="field-label">Hakkında</label>
-      <textarea id="edit-bio" class="input-field" rows="3" placeholder="Kendini tanıt…" maxlength="200"></textarea>
+      <h3 class="modal-card-heading">Edit Profile</h3>
+      <label class="field-label">Display Name</label>
+      <input id="edit-displayname" class="input-field" placeholder="Your display name..." maxlength="50"/>
+      <label class="field-label">About</label>
+      <textarea id="edit-bio" class="input-field" rows="3" placeholder="Introduce yourself..." maxlength="200"></textarea>
       <div id="edit-profile-error" class="form-error hidden"></div>
-      <button id="btn-save-profile" class="btn btn-primary btn-full">Kaydet</button>
+      <button id="btn-save-profile" class="btn btn-primary btn-full">Save</button>
     </div>
   </div>
 </div>
@@ -167,33 +167,33 @@
     <aside id="sidebar">
       <div class="sidebar-header">
         <a href="#/dashboard" class="nav-logo-sm" title="Dashboard">◈</a>
-        <span id="sidebar-list-name" class="sidebar-title" contenteditable="true" spellcheck="false">Liste</span>
+        <span id="sidebar-list-name" class="sidebar-title" contenteditable="true" spellcheck="false">List</span>
       </div>
 
-      <div class="sidebar-section-label">Görünüm</div>
+      <div class="sidebar-section-label">View</div>
       <div class="view-toggle" id="view-toggle">
         <button class="view-btn active" data-view="kanban">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="4" height="12" rx="1" fill="currentColor" opacity=".8"/><rect x="6" y="2" width="4" height="12" rx="1" fill="currentColor" opacity=".8"/><rect x="11" y="2" width="4" height="12" rx="1" fill="currentColor" opacity=".8"/></svg>
-          Pano
+          Board
         </button>
         <button class="view-btn" data-view="tree">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="2.5" r="1.8" stroke="currentColor" stroke-width="1.3"/><circle cx="3" cy="13" r="1.8" stroke="currentColor" stroke-width="1.3"/><circle cx="13" cy="13" r="1.8" stroke="currentColor" stroke-width="1.3"/><line x1="8" y1="4.3" x2="3.8" y2="11.2" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="4.3" x2="12.2" y2="11.2" stroke="currentColor" stroke-width="1.2"/></svg>
-          Ağaç
+          Tree
         </button>
       </div>
 
-      <div class="sidebar-section-label">Paylaşım</div>
+      <div class="sidebar-section-label">Sharing</div>
       <div id="share-section">
-        <button id="btn-share-settings" class="btn btn-ghost btn-full btn-sm">⊡ Paylaşım Ayarları</button>
+        <button id="btn-share-settings" class="btn btn-ghost btn-full btn-sm">⊡ Share Settings</button>
         <div id="share-links-list" class="share-links-list"></div>
       </div>
 
-      <div class="sidebar-section-label" style="margin-top:8px">Katılımcılar</div>
+      <div class="sidebar-section-label" style="margin-top:8px">Participants</div>
       <div id="users-list" class="users-list"></div>
 
       <div class="sidebar-footer">
         <div id="permission-badge" class="perm-badge"></div>
-        <div id="connection-badge" class="conn-badge conn-connecting">Bağlanıyor…</div>
+        <div id="connection-badge" class="conn-badge conn-connecting">Connecting...</div>
       </div>
     </aside>
 
@@ -201,24 +201,24 @@
       <!-- KANBAN -->
       <div id="kanban-view" class="view-panel">
         <div class="kanban-topbar">
-          <h2 id="kanban-view-title">Görevler</h2>
-          <button id="btn-add-task-kanban" class="btn btn-primary btn-sm edit-only">+ Görev Ekle</button>
+          <h2 id="kanban-view-title">Tasks</h2>
+          <button id="btn-add-task-kanban" class="btn btn-primary btn-sm edit-only">+ Add Task</button>
         </div>
         <div class="kanban-board">
           <div class="kanban-col" id="col-open"        data-status="open">
-            <div class="kanban-col-header"><span class="col-dot col-dot-open"></span><span class="col-title">Yapılacak</span><span class="col-count" id="count-open">0</span></div>
+            <div class="kanban-col-header"><span class="col-dot col-dot-open"></span><span class="col-title">To Do</span><span class="col-count" id="count-open">0</span></div>
             <div class="kanban-cards" id="cards-open"></div>
-            <button class="btn-col-add edit-only" data-col="open">+ Ekle</button>
+            <button class="btn-col-add edit-only" data-col="open">+ Add</button>
           </div>
           <div class="kanban-col" id="col-in_progress" data-status="in_progress">
-            <div class="kanban-col-header"><span class="col-dot col-dot-inprogress"></span><span class="col-title">Yapılıyor</span><span class="col-count" id="count-in_progress">0</span></div>
+            <div class="kanban-col-header"><span class="col-dot col-dot-inprogress"></span><span class="col-title">In Progress</span><span class="col-count" id="count-in_progress">0</span></div>
             <div class="kanban-cards" id="cards-in_progress"></div>
-            <button class="btn-col-add edit-only" data-col="in_progress">+ Ekle</button>
+            <button class="btn-col-add edit-only" data-col="in_progress">+ Add</button>
           </div>
           <div class="kanban-col" id="col-done"        data-status="done">
-            <div class="kanban-col-header"><span class="col-dot col-dot-done"></span><span class="col-title">Tamamlandı</span><span class="col-count" id="count-done">0</span></div>
+            <div class="kanban-col-header"><span class="col-dot col-dot-done"></span><span class="col-title">Done</span><span class="col-count" id="count-done">0</span></div>
             <div class="kanban-cards" id="cards-done"></div>
-            <button class="btn-col-add edit-only" data-col="done">+ Ekle</button>
+            <button class="btn-col-add edit-only" data-col="done">+ Add</button>
           </div>
         </div>
       </div>
@@ -226,13 +226,13 @@
       <!-- TREE -->
       <div id="tree-view" class="view-panel hidden">
         <div class="tree-toolbar">
-          <button id="btn-add-task-tree" class="btn btn-primary btn-sm edit-only">+ Düğüm Ekle</button>
+          <button id="btn-add-task-tree" class="btn btn-primary btn-sm edit-only">+ Add Node</button>
           <button id="btn-auto-layout"   class="btn btn-ghost btn-sm">
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="6" y="1" width="4" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="12" width="4" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="11" y="12" width="4" height="3" rx="1" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="4" x2="3" y2="12" stroke="currentColor" stroke-width="1.1"/><line x1="8" y1="4" x2="13" y2="12" stroke="currentColor" stroke-width="1.1"/></svg>
-            Otomatik Dizi
+            Auto Layout
           </button>
-          <span class="tree-hint" id="tree-connect-hint">Bağlantı için ⇢ tıkla, ardından hedef düğüme tıkla.</span>
-          <button id="btn-cancel-connect" class="btn btn-ghost btn-sm hidden">✕ İptal</button>
+          <span class="tree-hint" id="tree-connect-hint">Click ⇢ to connect, then click target.</span>
+          <button id="btn-cancel-connect" class="btn btn-ghost btn-sm hidden">✕ Cancel</button>
         </div>
         <div id="tree-canvas">
           <svg id="edges-svg" class="edges-svg">
@@ -252,22 +252,22 @@
   <div id="share-modal" class="modal-overlay hidden">
     <div class="modal-card" style="max-width:480px">
       <button class="modal-close" id="btn-share-modal-close">✕</button>
-      <h3 class="modal-card-heading">Paylaşım Ayarları</h3>
+      <h3 class="modal-card-heading">Share Settings</h3>
 
       <label class="toggle-row">
-        <span class="toggle-label">Herkese açık profilde göster</span>
+        <span class="toggle-label">Show on public profile</span>
         <input type="checkbox" id="share-public-toggle" class="toggle-checkbox"/>
         <span class="toggle-track"><span class="toggle-thumb"></span></span>
       </label>
 
       <div class="share-divider"></div>
-      <div class="share-create-label">Yeni paylaşım bağlantısı oluştur:</div>
+      <div class="share-create-label">Create a new share link:</div>
       <div class="share-create-row">
         <select id="share-perm-select" class="share-select">
-          <option value="view">Yalnızca Görüntüle</option>
-          <option value="edit">Düzenleyebilir</option>
+          <option value="view">View Only</option>
+          <option value="edit">Can Edit</option>
         </select>
-        <button id="btn-create-share" class="btn btn-primary btn-sm">Bağlantı Oluştur</button>
+        <button id="btn-create-share" class="btn btn-primary btn-sm">Bağlantı Create</button>
       </div>
 
       <div id="share-links-modal-list" class="share-links-modal-list"></div>
@@ -279,23 +279,23 @@
     <div class="modal-card">
       <button class="modal-close" id="btn-modal-close">✕</button>
       <div class="modal-header">
-        <input id="modal-task-title" class="modal-title-input" placeholder="Görev başlığı…"/>
-        <span id="modal-status-badge" class="status-badge status-open">Yapılacak</span>
+        <input id="modal-task-title" class="modal-title-input" placeholder="Task title..."/>
+        <span id="modal-status-badge" class="status-badge status-open">To Do</span>
       </div>
-      <textarea id="modal-task-desc" class="modal-desc" placeholder="Açıklama yaz…" rows="3"></textarea>
+      <textarea id="modal-task-desc" class="modal-desc" placeholder="Write a description..." rows="3"></textarea>
       <div class="status-cycle-row">
-        <button class="status-cycle-btn" data-status="open">Yapılacak</button>
+        <button class="status-cycle-btn" data-status="open">To Do</button>
         <span class="status-arrow">→</span>
-        <button class="status-cycle-btn" data-status="in_progress">Yapılıyor</button>
+        <button class="status-cycle-btn" data-status="in_progress">In Progress</button>
         <span class="status-arrow">→</span>
-        <button class="status-cycle-btn" data-status="done">Tamamlandı</button>
+        <button class="status-cycle-btn" data-status="done">Done</button>
       </div>
       <div class="modal-deps">
-        <div class="modal-deps-label">Bağımlılıklar<span class="deps-sublabel">(bunlar bitmeden bu görev kilitli kalır)</span></div>
+        <div class="modal-deps-label">Dependencies<span class="deps-sublabel">(task remains locked until these are done)</span></div>
         <div id="modal-deps-list" class="deps-chips"></div>
       </div>
       <div class="modal-actions">
-        <button id="btn-modal-delete" class="btn btn-danger edit-only">Görevi Sil</button>
+        <button id="btn-modal-delete" class="btn btn-danger edit-only">Delete Task</button>
       </div>
     </div>
   </div>
@@ -304,18 +304,18 @@
   <div id="add-task-modal" class="modal-overlay hidden">
     <div class="modal-card modal-card-sm">
       <button class="modal-close" id="btn-add-modal-close">✕</button>
-      <h3 class="modal-card-heading">Yeni Görev</h3>
-      <input id="new-task-title" class="input-field" placeholder="Görev başlığı…" maxlength="120"/>
-      <textarea id="new-task-desc" class="input-field" placeholder="Açıklama (isteğe bağlı)…" rows="2"></textarea>
+      <h3 class="modal-card-heading">New Task</h3>
+      <input id="new-task-title" class="input-field" placeholder="Task title..." maxlength="120"/>
+      <textarea id="new-task-desc" class="input-field" placeholder="Description (optional)..." rows="2"></textarea>
       <div id="dep-picker-section" class="dep-picker-section hidden">
         <div class="dep-picker-label">
           <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8l6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          Önce tamamlanması gereken görevler:
+          Tasks that must be completed first:
         </div>
         <div id="dep-picker-list" class="dep-picker-list"></div>
       </div>
       <div class="modal-actions">
-        <button id="btn-create-task" class="btn btn-primary">Oluştur</button>
+        <button id="btn-create-task" class="btn btn-primary">Create</button>
       </div>
     </div>
   </div>
