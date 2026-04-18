@@ -21,39 +21,6 @@ Treeban is a minimalist task manager that allows you to create **dependencies** 
 | Database | PostgreSQL (Neon) |
 | Auth | JWT (HTTP-only cookie) + bcryptjs |
 
-## Setup
-
-### Requirements
-- Node.js 18+
-- [Neon](https://neon.tech) account (free PostgreSQL)
-
-### Backend
-
-```bash
-cd backend
-cp .env.example .env   # Edit the .env file
-npm install
-node server.js
-```
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## Deployment
-
-| Service | Platform |
-|--------|----------|
-| Frontend | [Vercel](https://vercel.com) |
-| Backend | [Railway](https://railway.app) |
-| Database | [Neon](https://neon.tech) |
-
-Check the `backend/.env.example` file for details.
-
 ## Security
 
 - Passwords are hashed with `bcryptjs` (salt rounds: 10)

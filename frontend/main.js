@@ -125,7 +125,8 @@ $('form-register').addEventListener('submit', async e => {
 $('btn-logout').addEventListener('click', async () => {
   await api('POST', '/api/auth/logout');
   app.user = null;
-  navigate('#/');
+  if (app.socket) app.socket.disconnect();
+  window.location.href = '/';
 });
 
 // ══════════════════════════════════════════════════════════════════════════════
