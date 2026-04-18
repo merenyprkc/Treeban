@@ -35,9 +35,13 @@ const api = async (method, path, body) => {
 // ROUTING  (hash-based SPA)
 // ══════════════════════════════════════════════════════════════════════════════
 async function boot() {
-  // Check auth state once
-  const { user } = await api('GET', '/api/auth/me');
-  app.user = user;
+  try {
+    const res = await api('GET', '/api/auth/me');
+    app.user = res.user || null;
+  } catch (err) {
+    console.warn('Cannot connect to backend (CORS or offline).', err);
+    app.user = null;
+  }
   route();
 }
 
