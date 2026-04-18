@@ -32,4 +32,8 @@
 
 ## License
 
+<<<<<<< HEAD
 Copyright (c) 2026 merenyprkc. All rights reserved.
+=======
+Proprietary / All Rights Reserved
+>>>>>>> a661282a6b640e9b622a44eae5e791815fcca65c
