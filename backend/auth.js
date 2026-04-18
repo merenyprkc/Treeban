@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET  = process.env.JWT_SECRET || 'focus-tree-change-in-production-!';
+const JWT_SECRET  = process.env.JWT_SECRET || 'treeban-change-in-production-!';
 const COOKIE_NAME = 'ft_token';
 const COOKIE_OPTS = {
   httpOnly: true,

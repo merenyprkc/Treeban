@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 // ─── Connection ───────────────────────────────────────────────────────────────
 // Set DATABASE_URL in your environment (.env or Railway/Render dashboard)
-// Neon example: postgresql://user:pass@ep-xxx.us-east-2.aws.neon.tech/focustree?sslmode=require
+// Neon example: postgresql://user:pass@ep-xxx.us-east-2.aws.neon.tech/treeban?sslmode=require
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.DATABASE_URL?.includes('neon.tech') || process.env.NODE_ENV === 'production'

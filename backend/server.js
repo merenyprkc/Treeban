@@ -304,7 +304,7 @@ const PORT = process.env.PORT || 3001;
 
 db.initDB()
   .then(() => {
-    server.listen(PORT, () => console.log(`Focus-Tree backend → http://localhost:${PORT}`));
+    server.listen(PORT, () => console.log(`Treeban backend → http://localhost:${PORT}`));
   })
   .catch(err => {
     console.error('❌ Database init failed:', err.message);

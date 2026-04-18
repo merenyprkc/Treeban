@@ -1,13 +1,13 @@
-# ◈ Focus Tree
+# ◈ Treeban
 
 > Odaklan. Bağlantı kur. Tamamla.
 
-Focus Tree; görevler arası **bağımlılık** (dependency) kurabileceğin, **gerçek zamanlı işbirliği** sunan, minimalist bir görev yöneticisidir.
+Treeban; görevler arası **bağımlılık** (dependency) kurabileceğin, **gerçek zamanlı işbirliği** sunan, minimalist bir görev yöneticisidir.
 
 ## Özellikler
 
 - 📋 **Kanban Panosu** — Yapılacak / Yapılıyor / Tamamlandı sütunları
-- 🌳 **Focus Tree** — EU4 tarzı bağımlılık ağacı; önceki görev bitmeden sonraki kilitli kalır
+- 🌳 **Treeban** — EU4 tarzı bağımlılık ağacı; önceki görev bitmeden sonraki kilitli kalır
 - 👤 **Kullanıcı Hesapları** — Kayıt, giriş, herkese açık profil sayfası
 - 🔗 **Paylaşım Linkleri** — "Sadece görüntüle" veya "düzenleyebilir" izniyle liste paylaşımı
 - ⚡ **Gerçek Zamanlı** — Socket.io ile anında senkronizasyon
