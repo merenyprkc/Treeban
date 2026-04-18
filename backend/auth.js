@@ -4,7 +4,7 @@ const JWT_SECRET  = process.env.JWT_SECRET || 'treeban-change-in-production-!';
 const COOKIE_NAME = 'ft_token';
 const COOKIE_OPTS = {
   httpOnly: true,
-  sameSite: 'lax',
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   maxAge: 30 * 24 * 60 * 60 * 1000,   // 30 days
   secure: process.env.NODE_ENV === 'production',
 };
