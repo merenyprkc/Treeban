@@ -1,37 +1,37 @@
 # ◈ Treeban
 
-> Odaklan. Bağlantı kur. Tamamla.
+> Focus. Connect. Complete.
 
-Treeban; görevler arası **bağımlılık** (dependency) kurabileceğin, **gerçek zamanlı işbirliği** sunan, minimalist bir görev yöneticisidir.
+Treeban is a minimalist task manager that allows you to create **dependencies** between tasks and offers **real-time collaboration**.
 
-## Özellikler
+## Features
 
-- 📋 **Kanban Panosu** — Yapılacak / Yapılıyor / Tamamlandı sütunları
-- 🌳 **Treeban** — EU4 tarzı bağımlılık ağacı; önceki görev bitmeden sonraki kilitli kalır
-- 👤 **Kullanıcı Hesapları** — Kayıt, giriş, herkese açık profil sayfası
-- 🔗 **Paylaşım Linkleri** — "Sadece görüntüle" veya "düzenleyebilir" izniyle liste paylaşımı
-- ⚡ **Gerçek Zamanlı** — Socket.io ile anında senkronizasyon
+- 📋 **Kanban Board** — To Do / In Progress / Done columns
+- 🌳 **Tree View** — Dependency tree; a task remains locked until its prerequisite is completed
+- 👤 **User Accounts** — Registration, login, public profile page
+- 🔗 **Share Links** — List sharing with "view only" or "can edit" permissions
+- ⚡ **Real-Time** — Instant synchronization with Socket.io
 
-## Teknoloji Yığını
+## Technology Stack
 
-| Katman | Teknoloji |
+| Layer | Technology |
 |--------|-----------|
 | Frontend | Vite + Vanilla JS + CSS |
 | Backend | Node.js + Express + Socket.io |
-| Veritabanı | PostgreSQL (Neon) |
+| Database | PostgreSQL (Neon) |
 | Auth | JWT (HTTP-only cookie) + bcryptjs |
 
-## Kurulum
+## Setup
 
-### Gereksinimler
+### Requirements
 - Node.js 18+
-- [Neon](https://neon.tech) hesabı (ücretsiz PostgreSQL)
+- [Neon](https://neon.tech) account (free PostgreSQL)
 
 ### Backend
 
 ```bash
 cd backend
-cp .env.example .env   # .env dosyasını düzenle
+cp .env.example .env   # Edit the .env file
 npm install
 node server.js
 ```
@@ -46,21 +46,21 @@ npm run dev
 
 ## Deployment
 
-| Servis | Platform |
+| Service | Platform |
 |--------|----------|
 | Frontend | [Vercel](https://vercel.com) |
 | Backend | [Railway](https://railway.app) |
-| Veritabanı | [Neon](https://neon.tech) |
+| Database | [Neon](https://neon.tech) |
 
-Detaylar için `backend/.env.example` dosyasına bak.
+Check the `backend/.env.example` file for details.
 
-## Güvenlik
+## Security
 
-- Şifreler `bcryptjs` ile hash'lenir (salt rounds: 10)
-- JWT'ler HTTP-only cookie olarak saklanır (XSS'e karşı)
-- Tüm gizli bilgiler `.env` dosyasında tutulur — **asla Git'e commit edilmez**
-- Socket.io olayları sunucu tarafında izin kontrolünden geçer
+- Passwords are hashed with `bcryptjs` (salt rounds: 10)
+- JWTs are stored as HTTP-only cookies (protection against XSS)
+- All confidential information is stored in the `.env` file — **never committed to Git**
+- Socket.io events pass through server-side permission checks
 
-## Lisans
+## License
 
 MIT
