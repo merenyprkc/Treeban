@@ -32,4 +32,4 @@
 
 ## License
 
-MIT
+Proprietary / All Rights Reserved
